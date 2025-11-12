@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Halısaha Rakip Bul - Türkiye'nin en yenilikçi halısaha maç organizasyon platformu. Eksik oyuncu bulma, saha rezervasyonu ve maç organizasyonu tek platformda. Çok yakında!">
+    <meta name="keywords" content="halısaha, futbol, maç organizasyonu, saha rezervasyonu, spor, halısaha bul, rakip bul">
+    <meta property="og:title" content="Halısaha Rakip Bul - Futbolun Yeni Adresi">
+    <meta property="og:description" content="Eksik oyuncu bulma derdine son! Konumuna göre maç bul, kendi maçını organize et ve güvenilir oyuncularla tanış.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Halısaha Rakip Bul - Futbolun Dijital Sahası | Çok Yakında</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00D084;
+            --primary-dark: #00a065;
+            --accent-color: #FFD700;
+            --dark-bg: #0A0A0A;
+            --darker-bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-hover: rgba(255, 255, 255, 0.06);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(255, 255, 255, 0.2);
+            --text-primary: #FFFFFF;
+            --text-secondary: #A1A1A1;
+            --text-muted: #6B6B6B;
+            --gradient-primary: linear-gradient(135deg, #00D084 0%, #00a065 100%);
+            --gradient-text: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated Background */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(0, 208, 132, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 60%, rgba(0, 160, 101, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(0, 208, 132, 0.08) 0%, transparent 50%),
+                linear-gradient(180deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+        }
+        
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Floating Football Icons */
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .football-icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.03;
+            animation: float-up 20s linear infinite;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.03;
+            }
+            90% {
+                opacity: 0.03;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .football-icon:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 18s; }
+        .football-icon:nth-child(2) { left: 20%; animation-delay: 3s; animation-duration: 22s; }
+        .football-icon:nth-child(3) { left: 35%; animation-delay: 6s; animation-duration: 20s; }
+        .football-icon:nth-child(4) { left: 50%; animation-delay: 9s; animation-duration: 25s; }
+        .football-icon:nth-child(5) { left: 65%; animation-delay: 12s; animation-duration: 19s; }
+        .football-icon:nth-child(6) { left: 80%; animation-delay: 15s; animation-duration: 21s; }
+        .football-icon:nth-child(7) { left: 90%; animation-delay: 18s; animation-duration: 23s; }
+
+        /* Header */
+        .header {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            font-size: 1.8rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 0 8rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 50%, rgba(255,255,255,0.6) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            max-width: 1000px;
+            animation: text-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes text-glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .hero h1 .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero h1 .highlight::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+            animation: underline-grow 2s ease-out forwards;
+        }
+        
+        @keyframes underline-grow {
+            0% { transform: scaleX(0); }
+            100% { transform: scaleX(1); }
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            max-width: 700px;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .coming-soon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .coming-soon-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid var(--primary-color);
+            background: linear-gradient(135deg, rgba(0, 208, 132, 0.1) 0%, rgba(0, 160, 101, 0.05) 100%);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            backdrop-filter: blur(20px);
+            animation: pulse-border 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coming-soon-badge::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            50%, 100% { left: 200%; }
+        }
+        
+        @keyframes pulse-border {
+            0%, 100% { 
+                border-color: var(--primary-color);
+                box-shadow: 0 0 20px rgba(0, 208, 132, 0.3);
+            }
+            50% { 
+                border-color: var(--primary-dark);
+                box-shadow: 0 0 30px rgba(0, 208, 132, 0.5);
+            }
+        }
+        
+        .launch-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin: 4rem 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            position: relative;
+        }
+        
+        .stat-number {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        /* Sections */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        
+        .feature-card:hover {
+            background: var(--card-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 208, 132, 0.1);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            padding: 12px;
+            background: rgba(0, 208, 132, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover .feature-icon {
+            background: rgba(0, 208, 132, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* How it Works Section */
+        .how-it-works-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            position: relative;
+        }
+        
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 60px;
+            height: calc(100% - 30px);
+            width: 2px;
+            background: linear-gradient(var(--border-color) 0%, transparent 100%);
+        }
+
+        .step-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            background-color: var(--dark-bg);
+            z-index: 1;
+        }
+
+        .step-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 4rem 0 2rem 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="aurora-background"></div>
+    <header class="header container">
+        <div class="logo">
+            <span>⚽</span>
+            Halısaha Rakip Bul
+        </div>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <h1 class="reveal">Maç ayarlamak hiç bu kadar <span class="highlight">kolay</span> olmadı.</h1>
+            <p class="reveal" style="transition-delay: 0.1s;">Futbol tutkunlarını tek bir platformda birleştiriyoruz. Eksik oyuncu arama derdine son veriyor, saha rezervasyonunu basitleştiriyor ve adil bir oyun ortamı yaratıyoruz.</p>
+            <div class="coming-soon-badge reveal" style="transition-delay: 0.2s;">
+                ÇOK YAKINDA
+            </div>
+        </section>
+
+        <section id="features" class="section container">
+            <div class="section-header reveal">
+                <h2>Oyunun Kurallarını Değiştiriyoruz</h2>
+                <p>Kusursuz bir halısaha deneyimi için ihtiyacınız olan her şeyi düşündük.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                    <h3>Akıllı Maç Arama</h3>
+                    <p>Konumunuza, oyun seviyenize ve tercih ettiğiniz saate göre en uygun maçları saniyeler içinde bulun.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                    <h3>Zahmetsiz Organizasyon</h3>
+                    <p>Birkaç dokunuşla kendi maçınızı oluşturun, takımınızı kurun ve saha rezervasyonunu tek bir yerden yönetin.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                     <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <h3>Güvenilir Topluluk</h3>
+                    <p>Oyuncu puanlama ve değerlendirme sistemiyle sadece yetenekli değil, aynı zamanda centilmen oyuncularla tanışın.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="how-it-works" class="section container">
+            <div class="section-header reveal">
+                <h2>Nasıl Çalışacak?</h2>
+                <p>Karmaşayı ortadan kaldıran 3 basit adım.</p>
+            </div>
+            <div class="how-it-works-steps">
+                <div class="step reveal">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>BUL VEYA OLUŞTUR</h3>
+                        <p>İster mevcut bir maça katıl, istersen kendi maçını organize ederek takımını kurmaya başla.</p>
+                    </div>
+                </div>
+                <div class="step reveal" style="transition-delay: 0.1s;">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>TAKIMI TAMAMLA</h3>
+                        <p>Eksik pozisyonlar için açtığın ilana gelen başvuruları onayla veya arkadaşlarını davet et.</p>
+                    </div>
+                </div>
+                <div class="step reveal" style="transition-delay: 0.2s;">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>SAHAYA ÇIK</h3>
+                        <p>Herkes hazır! Sana sadece sahaya çıkıp futbolun keyfini çıkarmak kalıyor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer container">
+        <p>© 2025 Halısaha Rakip Bul. Tüm hakları saklıdır.</p>
+        <p style="margin-top: 0.5rem;">İletişim & İşbirlikleri: <a href="mailto:haciyusuf@ergin.dev">haciyusuf@ergin.dev</a></p>
+    </footer>
+    
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
