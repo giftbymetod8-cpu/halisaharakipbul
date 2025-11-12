@@ -90,7 +90,6 @@
             padding: 0 2rem;
         }
         
-        /* Floating Football Icons */
         .floating-elements {
             position: fixed;
             width: 100%;
@@ -322,7 +321,6 @@
         }
         
         
-        /* Sections */
         .section {
             padding: 6rem 0;
             position: relative;
@@ -361,7 +359,6 @@
             line-height: 1.8;
         }
         
-        /* Features Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -576,7 +573,6 @@
     <div class="background-container"></div>
     <div class="grid-background"></div>
     
-    <!-- Floating Football Icons -->
     <div class="floating-elements">
         <span class="football-icon">⚽</span>
         <span class="football-icon">⚽</span>
@@ -608,7 +604,7 @@
                     <span>⏰</span>
                     ÇOK YAKINDA!
                 </div>
-                <div class="launch-date">2026 İlkbahar'da sizlerle...</div>
+                <div class="launch-date">2026 İtibarıyla sizlerle...</div>
             </div>
         </section>
         
@@ -647,7 +643,7 @@
                 <div class="feature-card reveal" style="transition-delay: 0.5s;">
                     <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
                     <h3>%100 İptal Garantisi</h3>
-                    <p>Beklenmedik durumlar için maç öncesi 2 saate kadar ücretsiz iptal imkanı.</p>
+                    <p>Beklenmedik durumlar için maç öncesi 3 saate kadar ücretsiz iptal imkanı.</p>
                 </div>
             </div>
         </section>
@@ -716,7 +712,6 @@
         });
         
         
-        // Smooth Scroll for Navigation Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -733,7 +728,6 @@
             });
         });
         
-        // Parallax Effect for Hero Text
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero');
@@ -743,7 +737,6 @@
             }
         });
         
-        // Add Hover Effect to Cards
         const cards = document.querySelectorAll('.feature-card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', function() {
@@ -755,7 +748,6 @@
             });
         });
         
-        // Typing Effect for Hero Title (optional)
         const heroTitle = document.querySelector('.hero h1');
         if (heroTitle) {
             const text = heroTitle.innerHTML;
@@ -771,7 +763,6 @@
                 }
             };
             
-            // Start typing after page load
             setTimeout(typeText, 500);
         }
     </script>
