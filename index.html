@@ -50,7 +50,6 @@
             position: relative;
         }
         
-        /* Animated Background */
         .background-container {
             position: fixed;
             top: 0;
@@ -132,7 +131,6 @@
         .football-icon:nth-child(6) { left: 80%; animation-delay: 15s; animation-duration: 21s; }
         .football-icon:nth-child(7) { left: 90%; animation-delay: 18s; animation-duration: 23s; }
 
-        /* Header */
         .header {
             padding: 2rem 0;
             display: flex;
@@ -200,7 +198,6 @@
             width: 100%;
         }
 
-        /* Hero Section */
         .hero {
             text-align: center;
             padding: 6rem 0 8rem 0;
@@ -426,7 +423,6 @@
             line-height: 1.8;
         }
 
-        /* How it Works Section */
         .how-it-works-steps {
             display: flex;
             flex-direction: column;
@@ -476,7 +472,6 @@
             color: var(--text-secondary);
         }
         
-        /* Footer */
         .footer {
             padding: 4rem 0 2rem 0;
             border-top: 1px solid var(--border-color);
@@ -525,7 +520,6 @@
             opacity: 0.8;
         }
         
-        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -554,7 +548,6 @@
             
         }
         
-        /* Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -696,7 +689,6 @@
     </footer>
     
     <script>
-        // Reveal Animation
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
